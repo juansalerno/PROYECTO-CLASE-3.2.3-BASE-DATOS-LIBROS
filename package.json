@@ -1,0 +1,15 @@
+{
+  "name": "proyecto-clase-3.2.3-base-datos-libros",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Juan Salerno",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^12.6.2",
+    "readline-sync": "^1.4.9"
+  }
+}
