@@ -1,4 +1,4 @@
-import Libro from './libro' 
+import Libro from './libro'
 import * as readlineSync from './node_modules/readline-sync';
 
 export default class GestorLibrosPorTeclado {
@@ -29,42 +29,49 @@ export default class GestorLibrosPorTeclado {
 
 
     public buscarLibroPorAutor(autor: string): Libro {
-        let contador: number = -1;
+        let encontrado: boolean = false;
         for (let i = 0; i < this.arregloLibros.length; i++) {
             if (autor.toLowerCase() == this.arregloLibros[i].getAutorLibro().toLowerCase()) {
-                contador++
+                encontrado = true;
                 return this.arregloLibros[i];
             }
         }
-        if (contador == -1)
-            console.log('No se encontraron resultados a la busqueda solicitada')
+        if (encontrado == false) {
+            console.log('No se encontraron resultados a la busqueda solicitada');
+            return null;
+        }
     }
 
     public buscarLibroPorNombre(nombre: string): Libro {
-        let contador: number = -1
+        let encontrado: boolean = false;
         for (let i = 0; i < this.arregloLibros.length; i++) {
             if (nombre.toLowerCase() == this.arregloLibros[i].getNombreLibro().toLowerCase()) {
-                contador++
+                encontrado = true;
                 return this.arregloLibros[i];
             }
         }
-        if (contador == -1)
-            console.log('No se encontraron resultados a la busqueda solicitada')
+        if (encontrado == false) {
+            console.log('No se encontraron resultados a la busqueda solicitada');
+            return null;
+        }
     }
 
 
-    public buscarLibrosPorAño(año: number): void {
-        let contador: number = -1
+    public imprimirLibrosPorAño(año: number): void {
+        let encontrado: boolean = false;
         if (año > 1700 && año <= 2019) {
             for (let i = 0; i < this.arregloLibros.length; i++) {
                 if (año == this.arregloLibros[i].getAñoEdicion()) {
-                    contador++
+                    encontrado = true;
                     console.log(this.arregloLibros[i]);
                 }
             }
-            if (contador == -1)
-                console.log('No se encontraron resultados a la busqueda solicitada')
+            if (encontrado == false) {
+                console.log('No se encontraron resultados a la busqueda solicitada');
+                return null;
+            }
         }
+        else console.log('El año ingresado debe ser mayor a al 1700 y menor o igual al 2019');
     }
 
 
@@ -73,9 +80,9 @@ export default class GestorLibrosPorTeclado {
             this.arregloLibros.splice((i - 1), 1);
     }
 
-    public eliminarLibroPorNombre(nombre: string){
-        for(let i= 0; i<this.arregloLibros.length; i++) {
-            if (nombre.toLowerCase() == this.arregloLibros[i].getNombreLibro().toLowerCase()){
+    public eliminarLibroPorNombre(nombre: string) {
+        for (let i = 0; i < this.arregloLibros.length; i++) {
+            if (nombre.toLowerCase() == this.arregloLibros[i].getNombreLibro().toLowerCase()) {
                 this.arregloLibros.splice(i, 1)
             }
         }

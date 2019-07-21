@@ -12,5 +12,5 @@ console.log(libros.buscarLibroPorNombre('la casa de papel'));
 libros.eliminarLibroPorNombre('el psicoanalista');
 libros.eliminarLibroPorNumeroDeLista(2);
 libros.reemplazarLibroEnFilaDelListado(1, 'Historia Argentina', 2018, 'Alperin Dongui');
-libros.buscarLibrosPorAño(2018);
+libros.imprimirLibrosPorAño(2018);
 libros.imprimirLibros();

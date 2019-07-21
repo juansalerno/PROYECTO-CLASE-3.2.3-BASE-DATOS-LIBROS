@@ -23,39 +23,47 @@ var GestorLibrosPorTeclado = /** @class */ (function () {
         this.arregloLibros.push(this.pedidoDatos());
     };
     GestorLibrosPorTeclado.prototype.buscarLibroPorAutor = function (autor) {
-        var contador = -1;
+        var encontrado = false;
         for (var i = 0; i < this.arregloLibros.length; i++) {
             if (autor.toLowerCase() == this.arregloLibros[i].getAutorLibro().toLowerCase()) {
-                contador++;
+                encontrado = true;
                 return this.arregloLibros[i];
             }
         }
-        if (contador == -1)
+        if (encontrado == false) {
             console.log('No se encontraron resultados a la busqueda solicitada');
+            return null;
+        }
     };
     GestorLibrosPorTeclado.prototype.buscarLibroPorNombre = function (nombre) {
-        var contador = -1;
+        var encontrado = false;
         for (var i = 0; i < this.arregloLibros.length; i++) {
             if (nombre.toLowerCase() == this.arregloLibros[i].getNombreLibro().toLowerCase()) {
-                contador++;
+                encontrado = true;
                 return this.arregloLibros[i];
             }
         }
-        if (contador == -1)
+        if (encontrado == false) {
             console.log('No se encontraron resultados a la busqueda solicitada');
+            return null;
+        }
     };
-    GestorLibrosPorTeclado.prototype.buscarLibrosPorAño = function (año) {
-        var contador = -1;
+    GestorLibrosPorTeclado.prototype.imprimirLibrosPorAño = function (año) {
+        var encontrado = false;
         if (año > 1700 && año <= 2019) {
             for (var i = 0; i < this.arregloLibros.length; i++) {
                 if (año == this.arregloLibros[i].getAñoEdicion()) {
-                    contador++;
+                    encontrado = true;
                     console.log(this.arregloLibros[i]);
                 }
             }
-            if (contador == -1)
+            if (encontrado == false) {
                 console.log('No se encontraron resultados a la busqueda solicitada');
+                return null;
+            }
         }
+        else
+            console.log('El año ingresado debe ser mayor a al 1700 y menor o igual al 2019');
     };
     GestorLibrosPorTeclado.prototype.eliminarLibroPorNumeroDeLista = function (i) {
         if (i > 0 && i <= this.arregloLibros.length)

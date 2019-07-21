@@ -25,7 +25,7 @@ console.log(listadoLibros.buscarLibroPorAutor('Tom Robinson'));
 console.log(listadoLibros.buscarLibroPorAutor('Mona Gimenez'));
 console.log(listadoLibros.buscarLibroPorNombre('Recetas de cocina'));
 console.log(listadoLibros.buscarLibroPorNombre('Vuelta al mundo'));
-listadoLibros.buscarLibrosPorAño(2010);
+listadoLibros.imprimirLibrosPorAño(2010);
 listadoLibros.reemplazarLibroEnFilaDelListado(2, 'Introduccion al PNL', 1992, 'John Grinder');
 listadoLibros.eliminarLibroPorNombre('recetas de cocina');
 listadoLibros.eliminarLibroPorNumeroDeLista(3);

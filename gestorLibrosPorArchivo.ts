@@ -9,21 +9,16 @@ export default class GestorLibrosPorArchivo {
     }
 
     private generarArregloDeLibrosDesdeArchivo(rutaArchivo, separador1, separador2): Libro[] {
-        let arregloTexto: string[] = fs.readFileSync(rutaArchivo, 'utf8').split(separador1);
-        let matriz: string[][] = new Array(arregloTexto.length);
-        let arrLibros: Libro[] = new Array(arregloTexto.length);
+        let texto: string = fs.readFileSync(rutaArchivo, 'utf8');
+        let arregloTexto: string[] = texto.split(separador1);
+        let arregloLibros: Libro[] = [];
         for (let i = 0; i < arregloTexto.length; i++) {
-            let x = arregloTexto[i].split(separador2);
-            matriz[i] = new Array(x.length);
-            for (let j = 0; j < x.length; j++) {
-                matriz[i][j] = x[j]
-            }
-        }
+            let linea = arregloTexto[i];
+            let datosLinea = linea.split(separador2);
+            arregloLibros.push(new Libro(datosLinea[0], parseInt(datosLinea[1]), datosLinea[2]))
 
-        for (let k = 0; k < arregloTexto.length; k++) {
-            arrLibros[k] = new Libro(matriz[k][0], parseInt(matriz[k][1]), matriz[k][2]);
         }
-        return arrLibros
+        return arregloLibros
     }
 
     public agregarLibroAlListado(nombre: string, año: number, autor: string): void {
@@ -32,42 +27,39 @@ export default class GestorLibrosPorArchivo {
 
 
     public buscarLibroPorAutor(autor: string): Libro {
-        let contador: number = -1;
         for (let i = 0; i < this.listadoLibros.length; i++) {
             if (autor.toLowerCase() == this.listadoLibros[i].getAutorLibro().toLowerCase()) {
-                contador++
                 return this.listadoLibros[i]
             }
         }
-        if (contador == -1)
-            console.log('No se encontraron resultados a la busqueda solicitada')
+        console.log('No se encontraron resultados a la busqueda solicitada');
+        return null;
     }
 
     public buscarLibroPorNombre(nombre: string): Libro {
-        let contador: number = -1
         for (let i = 0; i < this.listadoLibros.length; i++) {
             if (nombre.toLowerCase() == this.listadoLibros[i].getNombreLibro().toLowerCase()) {
-                contador++
                 return this.listadoLibros[i]
             }
         }
-        if (contador == -1)
-            console.log('No se encontraron resultados a la busqueda solicitada')
+        console.log('No se encontraron resultados a la busqueda solicitada');
+        return null;
     }
 
-
-    public buscarLibrosPorAño(año: number): void {
-        let contador: number = -1
+    public imprimirLibrosPorAño(año: number): void {
+        let encontrado: boolean = false;
         if (año > 1700 && año <= 2019) {
             for (let i = 0; i < this.listadoLibros.length; i++) {
                 if (año == this.listadoLibros[i].getAñoEdicion()) {
-                    contador++
-                    console.log(this.listadoLibros[i])
+                    encontrado = true;
+                    console.log(this.listadoLibros[i]);
                 }
             }
-            if (contador == -1)
-                console.log('No se encontraron resultados a la busqueda solicitada')
+            if (encontrado == false) {
+                console.log('No se encontraron resultados a la busqueda solicitada');
+            }
         }
+        else console.log('El año ingresado debe ser mayor al 1700 e igual o menor al 2019');
     }
 
     public eliminarLibroPorNumeroDeLista(i: number): void {
@@ -95,5 +87,3 @@ export default class GestorLibrosPorArchivo {
     }
 
 }
-
-
